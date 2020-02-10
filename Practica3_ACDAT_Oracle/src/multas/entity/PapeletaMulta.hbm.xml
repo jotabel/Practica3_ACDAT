@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-feb-2020 22:40:43 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="multas.entity.PapeletaMulta" table="PAPELETA_MULTA" schema="MULTAS" optimistic-lock="version">
+        <id name="idpapeleta" type="big_decimal">
+            <column name="IDPAPELETA" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoInfraccion" class="multas.entity.TipoInfraccion" fetch="select">
+            <column name="IDTIPOINFRACCION" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="conductor" class="multas.entity.Conductor" fetch="select">
+            <column name="IDPCONDUCTOR" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="policia" class="multas.entity.Policia" fetch="select">
+            <column name="IDPOLICIA" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="vehiculo" class="multas.entity.Vehiculo" fetch="select">
+            <column name="IDVEHICULO" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="FECHA" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

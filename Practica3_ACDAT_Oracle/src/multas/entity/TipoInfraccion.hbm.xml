@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-feb-2020 22:40:43 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="multas.entity.TipoInfraccion" table="TIPO_INFRACCION" schema="MULTAS" optimistic-lock="version">
+        <id name="idtipo" type="big_decimal">
+            <column name="IDTIPO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="40" />
+        </property>
+        <property name="importe" type="big_decimal">
+            <column name="IMPORTE" precision="22" scale="0" />
+        </property>
+        <set name="papeletaMultas" table="PAPELETA_MULTA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDTIPOINFRACCION" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="multas.entity.PapeletaMulta" />
+        </set>
+    </class>
+</hibernate-mapping>

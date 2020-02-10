@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-feb-2020 1:27:30 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="multas.entity.Conductor" table="conductor" catalog="bdmulta" optimistic-lock="version">
+        <id name="idpersona" type="int">
+            <column name="idpersona" />
+            <generator class="foreign">
+                <param name="property">persona</param>
+            </generator>
+        </id>
+        <one-to-one name="persona" class="multas.entity.Persona" constrained="true"></one-to-one>
+        <property name="licencia" type="string">
+            <column name="licencia" length="45" />
+        </property>
+        <property name="fechaExpiracion" type="date">
+            <column name="fechaExpiracion" length="10" />
+        </property>
+        <set name="papeletaMultas" table="papeleta_multa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idconductor" not-null="true" />
+            </key>
+            <one-to-many class="multas.entity.PapeletaMulta" />
+        </set>
+    </class>
+</hibernate-mapping>

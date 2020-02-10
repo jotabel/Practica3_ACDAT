@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-feb-2020 22:40:43 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="multas.entity.Persona" table="PERSONA" schema="MULTAS" optimistic-lock="version">
+        <id name="idpersona" type="big_decimal">
+            <column name="IDPERSONA" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="40" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="50" />
+        </property>
+        <property name="fechanacimiento" type="date">
+            <column name="FECHANACIMIENTO" length="7" />
+        </property>
+        <set name="vehiculos" table="VEHICULO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDPROPIETARIO" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="multas.entity.Vehiculo" />
+        </set>
+        <one-to-one name="policia" class="multas.entity.Policia"></one-to-one>
+        <one-to-one name="conductor" class="multas.entity.Conductor"></one-to-one>
+    </class>
+</hibernate-mapping>

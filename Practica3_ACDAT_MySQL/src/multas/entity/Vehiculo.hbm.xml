@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-feb-2020 1:27:30 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="multas.entity.Vehiculo" table="vehiculo" catalog="bdmulta" optimistic-lock="version">
+        <id name="idvehiculo" type="java.lang.Integer">
+            <column name="idvehiculo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="marcaVehiculo" class="multas.entity.MarcaVehiculo" fetch="select">
+            <column name="idmarca" not-null="true" />
+        </many-to-one>
+        <many-to-one name="modeloVehiculo" class="multas.entity.ModeloVehiculo" fetch="select">
+            <column name="idmodelo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="persona" class="multas.entity.Persona" fetch="select">
+            <column name="idpropietario" not-null="true" />
+        </many-to-one>
+        <property name="anio" type="java.lang.Integer">
+            <column name="anio" />
+        </property>
+        <property name="color" type="string">
+            <column name="color" length="45" />
+        </property>
+        <set name="papeletaMultas" table="papeleta_multa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idvehiculo" not-null="true" />
+            </key>
+            <one-to-many class="multas.entity.PapeletaMulta" />
+        </set>
+    </class>
+</hibernate-mapping>
